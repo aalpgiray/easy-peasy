@@ -60,7 +60,7 @@ export type MutableModelValues<Model> = {
 export type ModelValues<Model> = MutableModelValues<Model> & ReducerValues<Model>;
 
 // easy-peasy's decorated Redux dispatch() (e.g. dispatch.todos.insert(item); )
-export type Dispatch<Model = any> = Model extends Redux.Action ? Redux.Dispatch<Model> : ModelActions<Model>;
+export type Dispatch<Model = any> = Model extends Redux.Action ? Redux.Dispatch<Model> : Redux.Dispatch & ModelActions<Model>;
 
 /**
  * https://github.com/ctrlplusb/easy-peasy#createstoremodel-config
