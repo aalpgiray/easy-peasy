@@ -209,7 +209,7 @@ export type Select<StateValues, ResultantType> = (
   dependencies?: Array<(state: any) => any>,
 ) => never;
 
-export function select<StateValues = any, ResultantType = any>(
+export function select<StateValues, ResultantType>(
   selectFunction: (state: StateValues) => ResultantType,
   dependencies?: Array<(state: any) => any>,
 ): Select<StateValues, ResultantType>;
@@ -233,8 +233,8 @@ export class StoreProvider<Model = any> extends React.Component<{ store: Store<M
  * }));
  */
 
-export function useStore<Model = any, StateValue = any>(
-  mapState: (state: ModelValues<Model>) => StateValue,
+export function useStore<Model, StateValue>(
+  mapState: <ModelState extends ModelValues<Model>>(state: ModelState) => StateValue,
   externals?: Array<any>,
 ): StateValue;
 
@@ -254,6 +254,6 @@ export function useStore<Model = any, StateValue = any>(
  * }));
  */
 
-export function useAction<Model = any, ActionPayload = any>(
-  mapAction: (dispatch: Dispatch<Model>) => ActionFunction<ActionPayload>,
-): ActionFunction<ActionPayload>;
+export function useAction<IModel, ActionPayload>(
+  mapAction: <DispatchModel extends Dispatch<IModel>>(dispatch: DispatchModel) => ActionPayload,
+): ActionPayload;
