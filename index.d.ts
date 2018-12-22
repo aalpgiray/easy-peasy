@@ -215,7 +215,7 @@ export type Select<StateValues, ResultantType> = (
   dependencies?: Array<(state: any) => any>,
 ) => never;
 
-export function select<StateValues = any, ResultantType = any>(
+export function select<StateValues, ResultantType>(
   selectFunction: (state: StateValues) => ResultantType,
   dependencies?: Array<(state: any) => any>,
 ): Select<StateValues, ResultantType>;
