@@ -27,7 +27,7 @@ type ActionFunction<ActionPayload = any> = ActionPayload extends undefined | voi
   ? () => void
   : ActionPayload extends ActionPrimitive | Array<ActionPrimitive>
   ? (payload: ActionPayload) => void
-  : ActionPayload;
+  : FunctionWithoutFirstParam<ActionPayload>;
 type EffectResult<Result> = Result extends Promise<any> ? Result : Promise<Result>;
 
 // given a model, get the state shapes of any reducer(...)s
@@ -261,5 +261,5 @@ export function useStore<Model = any, StateValue = any>(
  */
 
 export function useAction<Model = any, ActionPayload = any>(
-  mapAction: (dispatch: Dispatch<Model>) => ActionFunction<ActionPayload>,
+  mapAction: (dispatch: Model) => ActionPayload,
 ): ActionFunction<ActionPayload>;
